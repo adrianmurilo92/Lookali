@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import FeaturedCategories from './components/FeaturedCategories';
@@ -6,6 +7,8 @@ import PopularProducts from './components/PopularProducts';
 import ArticlesSection from './components/ArticlesSection';
 import NewsletterSection from './components/NewsletterSection';
 import Footer from './components/Footer';
+import ProductDetail from './pages/ProductDetail';
+import Login from './pages/Login';
 
 function App() {
   const [cartItems, setCartItems] = useState(1);
@@ -15,15 +18,25 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header cartItems={cartItems} />
-      <HeroSection />
-      <FeaturedCategories />
-      <PopularProducts onAddToCart={addToCart} />
-      <ArticlesSection />
-      <NewsletterSection />
-      <Footer />
-    </div>
+    <Router>
+      <div className="min-h-screen bg-gray-50">
+        <Header cartItems={cartItems} />
+        <Routes>
+          <Route path="/" element={
+            <>
+              <HeroSection />
+              <FeaturedCategories />
+              <PopularProducts onAddToCart={addToCart} />
+              <ArticlesSection />
+              <NewsletterSection />
+            </>
+          } />
+          <Route path="/product/:id" element={<ProductDetail onAddToCart={addToCart} />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
