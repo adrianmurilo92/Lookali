@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Heart, Star, ShoppingCart, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -160,31 +161,35 @@ const PopularProducts: React.FC<PopularProductsProps> = ({ onAddToCart }) => {
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product) => (
-            <div key={product.id} className="bg-white rounded-2xl border border-gray-100 hover:shadow-lg transition-all duration-300 group overflow-hidden">
-              <div className="relative">
+            <div key={product.id} className="bg-gray-200 rounded-2xl hover:shadow-lg transition-all duration-300 group overflow-hidden p-4">
+              <div className="relative bg-white rounded-xl p-4 mb-4">
                 {product.discount && (
-                  <Badge className="absolute top-3 left-3 bg-orange-500 text-white text-xs px-2 py-1 rounded-md font-medium">
+                  <Badge className="absolute top-2 left-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-md font-medium border-0">
                     {product.discount}% off
                   </Badge>
                 )}
                 <button
                   onClick={() => toggleFavorite(product.id)}
-                  className="absolute top-3 right-3 p-2 bg-white rounded-full shadow-sm hover:shadow-md transition-shadow"
+                  className="absolute top-2 right-2 p-1.5 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
                 >
                   <Heart className={`w-4 h-4 ${favorites.includes(product.id) ? 'fill-red-500 text-red-500' : 'text-gray-400'}`} />
                 </button>
-                <img
-                  src={product.image}
-                  alt={product.title}
-                  className="w-full h-48 object-cover"
-                />
+                <Link to={`/product/${product.id}`}>
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    className="w-full h-40 object-cover rounded-lg"
+                  />
+                </Link>
               </div>
               
-              <div className="p-4 space-y-3">
+              <div className="space-y-3">
                 <div className="text-xs text-gray-500 font-medium">{product.brand}</div>
-                <h3 className="font-semibold text-gray-900 text-sm group-hover:text-green-600 transition-colors">
-                  {product.title}
-                </h3>
+                <Link to={`/product/${product.id}`}>
+                  <h3 className="font-semibold text-gray-900 text-sm group-hover:text-green-600 transition-colors">
+                    {product.title}
+                  </h3>
+                </Link>
                 
                 <div className="flex items-center gap-2">
                   <span className="text-sm line-through text-gray-400">${product.originalPrice}</span>

@@ -61,12 +61,14 @@ const FeaturedCategories: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {categories.map((category, index) => (
             <div key={index} className="group cursor-pointer">
-              <div className="bg-gray-50 hover:bg-gray-100 transition-colors rounded-2xl p-6 text-center border border-gray-100">
-                <div className={`w-16 h-16 mx-auto mb-4 ${category.bgColor} rounded-2xl flex items-center justify-center`}>
+              <div className="bg-gray-200 hover:bg-gray-300 transition-colors rounded-2xl p-6 text-center relative">
+                <div className="absolute inset-x-4 top-4 bottom-12 bg-white rounded-xl flex items-center justify-center">
                   <category.icon className={`w-8 h-8 ${category.iconColor}`} />
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-1 text-sm">{category.name}</h3>
-                <p className="text-xs text-gray-500">{category.count}</p>
+                <div className="mt-16">
+                  <h3 className="font-semibold text-gray-900 mb-1 text-sm">{category.name}</h3>
+                  <p className="text-xs text-gray-500">{category.count}</p>
+                </div>
               </div>
             </div>
           ))}
